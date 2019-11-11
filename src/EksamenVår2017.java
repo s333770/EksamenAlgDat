@@ -1,7 +1,5 @@
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.Comparator;
 import java.util.Queue;
-import java.util.Stack;
 
 public class EksamenVår2017 {
     /* Mitt forslag
@@ -49,6 +47,7 @@ public class EksamenVår2017 {
             return -(i+1);
         }
     }
+
     public static int finn(int[] a, int verdi)
     {
         int v = 0, h = a.length - 1;  // hver sin ende av tabellen
@@ -116,27 +115,14 @@ public class EksamenVår2017 {
     }
 
     public static void main(String[] args) {
-        Queue<Character> kø = new LinkedList<>();
-        char[] c = "ABCDEFGHI".toCharArray();
-        for (char d : c) kø.add(d);
-        System.out.println(kø.toString());                  // [A, B, C, D, E, F, G, H, I]
-        int antall = fjernBakerst(kø,5);
-        System.out.println(antall + " " + kø);   // 5 [A, B, C, D]
-        //antall = fjernBakerst(kø,5);
-        //System.out.println(antall + " " + kø);   // 4 []
-        Stack<Character> stakk = new Stack<>();
-        char[] bokstaver = "EDCBA".toCharArray();
-
-        for (char b : bokstaver) stakk.add(b);
-        System.out.println(stakk);  // Utskrift: [A, B, C, D, E]
-        Stack<Character> hjelp = new Stack<>();
-
-        int n = stakk.size();
-        for (int i = 0; i < n - 1; i++) hjelp.add(stakk.pop());
-        Character temp = stakk.pop();
-        while (!hjelp.empty()) stakk.add(hjelp.pop());
-        stakk.add(temp);
-        System.out.println(stakk);
-
+        Integer[] a = {5,3,8,1,4,7};
+        SBinTree<Integer> tre = new SBinTree<>(Comparator. naturalOrder ());
+        for ( int verdi : a) tre.leggInn(verdi);
+        System.out.println(tre.min());
+        tre.leggInn(6);
+        System.out.println(tre.høyde());
+        tre.leggInn(9);
+        tre.leggInn(10);
+        System.out.println(tre.høyde());
     }
 }
