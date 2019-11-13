@@ -1,3 +1,5 @@
+package Eksamen2017;
+
 public class LenketKø<T> implements Kø<T> {
     @Override
     public void leggInn(T verdi) {
