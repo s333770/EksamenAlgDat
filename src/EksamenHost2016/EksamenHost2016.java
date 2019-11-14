@@ -1,6 +1,6 @@
 package EksamenHost2016;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class EksamenHost2016 {
     public static int omorganiser(char [] c){
@@ -68,11 +68,61 @@ public class EksamenHost2016 {
 
     }
 
-    public static void main(String[] args) {
-        char[] c = "AbaAcBbAAaCCbcAB".toCharArray();
-        int antall = omorganiser4(c);
-        System.out.println(antall + "  " + Arrays.toString(c));
+    public static<T> int compare(List<T> a, List<T> b, Comparator<? super T> comp){
+        int m=Math.min(a.size(),b.size());
+        for(int i=0; i<m;i++){
+            int cmp=comp.compare(a.get(i),b.get(i));
+            if(cmp!=0){
+                return cmp;
+            }
+        }
+        return a.size()-b.size();
+    }
+    /*
+    Raskere metode som bruker Iterator
+     public static <T> int compare(Liste<T> a, Liste<T> b, Comparator<? super T> comp)
+  {
+    Iterator<T> i = a.iterator(), j = b.iterator();
+    int m = Math.min(a.antall(), b.antall());
 
+    for (int k = 0; k < m; k++)
+    {
+      int cmp = comp.compare(i.next(), j.next());
+      if (cmp != 0) return cmp;       // i.next() og j.next() er forskjellige
+    }
+
+    // a er nå første del av b eller b første del av a
+    return a.antall() - b.antall();   // den korteste er minst
+  }
+    * */
+    public static <T> void omvendtkopi(Stack<T> a, Stack<T> b){
+        Stack<T> hjelp=new Stack<>();
+        int lengde=a.size();
+        for(int i=0; i<lengde;i++){
+            T verdi=a.pop();
+            b.add(verdi);
+            hjelp.add(verdi);
+        }
+        while(!hjelp.isEmpty()){
+            a.add(hjelp.pop());
+        }
+
+    }
+
+
+    public static void main(String[] args) {
+        /*
+        Character[] tegn1 = {'A','B','C'}, tegn2 = {'A','B','D'};
+        Integer[] tall1 = {1,2,3,4,5}, tall2 = {1,2,3,4};
+        List<Character> a = new LinkedList(Arrays.asList(tegn1));  // A,B,C
+        List<Character> b = new LinkedList(Arrays.asList(tegn2));// A,B,D
+        List<Integer> c = new LinkedList<>(Arrays.asList(tall1));    // 1,2,3,4,5
+        */
+        Stack<String> a = new Stack<>(), b = new Stack<>();
+        a.add("C"); a.add("B"); a.add("A");
+        System.out.println(a + " " + b);  // utskrift: [A, B, C] []
+        omvendtkopi(a,b);
+        System.out.println(a + " " + b);  // utskrift: [A, B, C] [C, B, A]
 
     }
 
